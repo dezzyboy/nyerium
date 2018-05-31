@@ -1,0 +1,62 @@
+What you need (recommended):
+1) Latest windows wallet from: https://github.com/nyerium-core/nyerium/releases
+2) 10001 NYEX coins
+3) Ubuntu 16.04 VPS - affiliated VPS provider DigitalOcean - https://m.do.co/c/c46d97bec890
+     get $10 free for your first month 
+4) Putty - https://the.earth.li/~sgtatham/putty/latest/w32/putty-0.70-installer.msi
+5) Auto install script for Linux - 
+Getting started:
+
+Prepare 10001 coins
+
+Windows side:
+Extract downloaded windows wallet
+Run nyerium-qt
+Wait for initial init
+Click options -> wallet -> check "Enable coin control features" & "Show Masternodes tab"
+If your coin is still in exchange, transfer at least 10001 coins back to Windows wallet.
+Inside windows wallet, click file -> receiving addresses
+Click new
+Put a name as label for the new address
+Right click the address, select copy address, click close
+When there is 10001 coins inside windows wallet, click Send tab
+Paste copied address  in Pay To:
+Amount: 10000
+Click "Send" button below
+Windows wallet side is done for now
+Next, get Ubuntu 16.04 VPS.
+Install putty & open it.
+Input ip address of your vps & click open
+When prompted for username, input root
+When prompted for password, initial password is provided by VPS provider.
+Change password by typing command passwd
+Issue command "cd"
+Next would be to get the auto install script, copy entire command below:
+sudo wget https://www.dropbox.com/s/dr2x4plspdio9gc/mnscript.sh
+
+Go to putty & paste (right click mouse button)
+Type command below after gotten auto install script:
+chmod -R 755 mnscript.sh
+./mnscript.sh
+
+Wait for around 1 hour time for installation to complete.
+At the end of the script, it would generate masternode private key for you.
+Copy the key by highlighting the text (putty will auto copy when you highlight the text)
+Back to windows, open notepad
+Paste the private key earlier onto notepad
+Back to windows wallet
+Click tools -> debug console
+Issue command "masternode outputs"
+For output, there would be 1 long text (transaction id) & 1 single digit number at the end (output index)
+Copy the output to notepad
+Back to windows wallet
+Click Tools-> Open masternode configure file
+Fill in new line with template as below:
+
+Masternode-Alias VPS-IP-address:57418 private-key-from-vps transaction-id output-index
+
+Save & close
+Close Windows wallet & open again
+Wait till complete sync, click masternodes, click the masternode that you want to activate, click Start alias
+Click Update
+After activating, you would see Masternode is Running
